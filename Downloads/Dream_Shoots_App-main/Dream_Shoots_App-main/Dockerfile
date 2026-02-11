@@ -1,16 +1,16 @@
 # Multi-stage build for backend (FastAPI)
 FROM python:3.11-slim as backend-builder
 
-WORKDIR /app/backend
+WORKDIR /build
 
 # Install dependencies
 COPY backend/requirements.txt .
-RUN pip install --no-cache-dir -r requirements.txt
+RUN pip install --no-cache-dir -r requirements.txt -t ./lib
 
 # Build stage for frontend (React)
 FROM node:18-alpine as frontend-builder
 
-WORKDIR /app/frontend
+WORKDIR /build
 
 # Copy frontend files
 COPY frontend/package*.json ./
@@ -19,8 +19,10 @@ RUN npm ci --omit=dev
 # Copy source
 COPY frontend/src ./src
 COPY frontend/public ./public
-COPY frontend/*.config.js ./
-COPY frontend/*.json ./
+COPY frontend/craco.config.js ./
+COPY frontend/tailwind.config.js ./
+COPY frontend/postcss.config.js ./
+COPY frontend/jsconfig.json ./
 
 # Build the React app
 RUN npm run build
@@ -30,15 +32,15 @@ FROM python:3.11-slim
 
 WORKDIR /app
 
-# Install Node and npm for serving frontend
-RUN apt-get update && apt-get install -y nodejs npm && rm -rf /var/lib/apt/lists/*
+# Install curl for healthcheck
+RUN apt-get update && apt-get install -y --no-install-recommends curl && rm -rf /var/lib/apt/lists/*
 
-# Copy backend with dependencies from builder
-COPY --from=backend-builder /usr/local/lib/python3.11/site-packages /usr/local/lib/python3.11/site-packages
+# Copy Python dependencies from builder
+COPY --from=backend-builder /build/lib /usr/local/lib/python3.11/site-packages
 COPY backend ./backend
 
 # Copy built frontend from builder
-COPY --from=frontend-builder /app/frontend/build ./frontend/build
+COPY --from=frontend-builder /build/build ./frontend/build
 
 # Expose ports
 EXPOSE 8000 3000
