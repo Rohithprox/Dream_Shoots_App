@@ -23,10 +23,16 @@ api_router = APIRouter(prefix="/api")
 # Get environment variables
 ENVIRONMENT = os.environ.get('ENVIRONMENT', 'development')
 FRONTEND_URL = os.environ.get('FRONTEND_URL', 'http://localhost:3000')
-CORS_ORIGINS = os.environ.get('CORS_ORIGINS', 'http://localhost:3000,http://127.0.0.1:3000')
+CORS_ORIGINS = os.environ.get('CORS_ORIGINS')
 
 # Parse CORS origins
-cors_origins_list = [origin.strip() for origin in CORS_ORIGINS.split(',')]
+if CORS_ORIGINS:
+    cors_origins_list = [origin.strip() for origin in CORS_ORIGINS.split(',')]
+    cors_allow_credentials = True
+else:
+    # Fallback: allow all origins when not explicitly configured
+    cors_origins_list = ["*"]
+    cors_allow_credentials = False
 
 
 class BookingCreate(BaseModel):
@@ -110,7 +116,7 @@ app.include_router(api_router)
 # Configure CORS
 app.add_middleware(
     CORSMiddleware,
-    allow_credentials=True,
+    allow_credentials=cors_allow_credentials,
     allow_origins=cors_origins_list,
     allow_methods=["*"],
     allow_headers=["*"],
