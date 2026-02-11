@@ -4,18 +4,18 @@ FROM node:18-alpine as builder
 WORKDIR /app
 
 # Copy package files
-COPY package*.json ./
+COPY frontend/package*.json ./
 
 # Install dependencies
 RUN npm ci
 
 # Copy source files
-COPY src ./src
-COPY public ./public
-COPY craco.config.js ./
-COPY tailwind.config.js ./
-COPY postcss.config.js ./
-COPY jsconfig.json ./
+COPY frontend/src ./src
+COPY frontend/public ./public
+COPY frontend/craco.config.js ./
+COPY frontend/tailwind.config.js ./
+COPY frontend/postcss.config.js ./
+COPY frontend/jsconfig.json ./
 
 # Build the application
 ARG REACT_APP_BACKEND_URL=https://api.yourdomain.com
