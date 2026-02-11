@@ -1,3 +1,6 @@
+# Dream Shoots App - Railway Configuration
+# For separate services, add them individually in Railway Dashboard
+
 [build]
 builder = "dockerfile"
 
@@ -6,24 +9,4 @@ path = "Dockerfile"
 
 [deploy]
 numReplicas = 1
-startCommand = "npm run build && npm run start"
 restartPolicyMaxRetries = 5
-
-[[services]]
-name = "api"
-buildCommand = "cd backend && pip install -r requirements.txt"
-startCommand = "cd backend && uvicorn server:app --host 0.0.0.0 --port $PORT"
-buildWorkingDirectory = "."
-startWorkingDirectory = "."
-
-[[services.variables]]
-name = "ENVIRONMENT"
-value = "production"
-
-[[services.variables]]
-name = "PORT"
-value = "8000"
-
-[[services.volumes]]
-name = "data"
-mountPath = "/data"
