@@ -1,8 +1,8 @@
 FROM node:18-alpine as builder
 WORKDIR /app
 
-# Copy everything from frontend folder at once
-COPY frontend/ ./
+# Build context is already the frontend folder
+COPY . ./
 
 # Install dependencies
 RUN npm ci
