@@ -3,19 +3,17 @@ FROM node:18-alpine as builder
 
 WORKDIR /app
 
-# Copy package files
-# Diagnostic: check what's in the current context
+# Copy everything from the context
+COPY . .
+
+# Diagnostic: what was copied?
 RUN ls -la
-COPY package*.json ./ || (ls -la .. && ls -la ../frontend && exit 1)
 
 # Install dependencies
 RUN npm ci || (npm install && echo "npm ci failed, falling back to npm install")
 
-# Copy configuration and source files
-COPY . ./
-
 # Build the application
-ARG REACT_APP_BACKEND_URL=https://api.yourdomain.com
+ARG REACT_APP_BACKEND_URL
 ENV REACT_APP_BACKEND_URL=$REACT_APP_BACKEND_URL
 RUN npm run build
 
