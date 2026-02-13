@@ -14,7 +14,7 @@ const Footer = () => {
           {/* Brand */}
 
           {/* Quick Links */}
-          <div className="col-span-1">
+          <div className="col-span-1 md:pl-12">
             <h4 className="text-white font-bold text-xs md:text-sm tracking-wider uppercase mb-3 md:mb-4">Quick Links</h4>
             <div className="space-y-2 md:space-y-3">
               {[
