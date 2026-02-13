@@ -2,11 +2,11 @@ import React from 'react';
 import { MapPin } from 'lucide-react';
 
 const locations = [
-  { city: 'Nellore', tagline: 'Our Home Base', main: true },
-  { city: 'Hyderabad', tagline: 'The City of Pearls', main: false },
-  { city: 'Vijayawada', tagline: 'The Business Capital', main: false },
-  { city: 'Ongole', tagline: 'The Prakasam Hub', main: false },
-  { city: 'Tirupati', tagline: 'The Holy City', main: false },
+  { city: 'Nellore', tagline: 'Our Home Base', main: true, icon: '/nelloree.svg' },
+  { city: 'Hyderabad', tagline: 'The City of Pearls', main: false, icon: '/hydd.svg' },
+  { city: 'Vijayawada', tagline: 'The Business Capital', main: false, icon: '/vijayy.svg' },
+  { city: 'Ongole', tagline: 'The Prakasam Hub', main: false, icon: '/ogl.svg' },
+  { city: 'Tirupati', tagline: 'The Holy City', main: false, icon: '/tirup.svg' },
 ];
 
 const LocationsSection = () => {
@@ -30,14 +30,12 @@ const LocationsSection = () => {
             <div
               key={i}
               data-testid={`location-card-${i}`}
-              className={`service-card bg-[var(--ds-card)] border rounded-xl p-6 text-center ${
-                loc.main ? 'border-[var(--ds-red)] red-glow md:col-span-1' : 'border-[var(--ds-border)]'
-              }`}
+              className={`service-card bg-[var(--ds-card)] border rounded-xl p-6 text-center ${loc.main ? 'border-[var(--ds-red)] red-glow md:col-span-1' : 'border-[var(--ds-border)]'
+                }`}
             >
-              <div className={`w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-4 ${
-                loc.main ? 'bg-[var(--ds-red)]/20 border border-[var(--ds-red)]' : 'bg-[rgba(220,38,38,0.08)] border border-[rgba(220,38,38,0.25)]'
-              }`}>
-                <MapPin size={20} className="text-[var(--ds-red)]" />
+              <div className={`w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-4 overflow-hidden ${loc.main ? 'bg-[var(--ds-red)]/20 border border-[var(--ds-red)] shadow-[0_0_15px_rgba(220,38,38,0.3)]' : 'bg-[rgba(220,38,38,0.08)] border border-[rgba(220,38,38,0.25)]'
+                }`}>
+                <img src={loc.icon} alt={loc.city} className="w-full h-full object-cover" />
               </div>
               <h3 className="text-white font-bold text-lg mb-1">{loc.city}</h3>
               <p className="text-gray-500 text-xs">{loc.tagline}</p>
