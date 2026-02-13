@@ -22,9 +22,8 @@ const Navbar = () => {
   return (
     <nav
       data-testid="navbar"
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        scrolled ? 'navbar border-b border-[#1a1a1a]' : 'bg-transparent'
-      }`}
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${scrolled ? 'navbar border-b border-[#1a1a1a]' : 'bg-transparent'
+        }`}
     >
       <div className="max-w-7xl mx-auto px-6 py-3 flex items-center justify-between">
         <div
@@ -33,7 +32,7 @@ const Navbar = () => {
           onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
         >
           <img
-            src="/dreamshoots-logo.png"
+            src="/Dream Shoots Logo.svg"
             alt="Dream Shoots"
             className="h-16 md:h-20 w-auto"
           />
