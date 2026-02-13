@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import axios from 'axios';
-import { Check, X, Clock, Trash2, RefreshCw, Download, Filter, CheckCircle } from 'lucide-react';
+import { Check, X, Clock, Trash2, RefreshCw, Download, Filter, CheckCircle, LogOut } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 const API = `${BACKEND_URL}/api`;
@@ -12,10 +13,19 @@ const statusColors = {
 };
 
 const AdminPage = () => {
+  const navigate = useNavigate();
   const [bookings, setBookings] = useState([]);
   const [loading, setLoading] = useState(true);
   const [statusFilter, setStatusFilter] = useState('all');
   const [dateFilter, setDateFilter] = useState('');
+
+  // Check authentication on mount
+  useEffect(() => {
+    const isAuthenticated = sessionStorage.getItem('adminAuth');
+    if (!isAuthenticated) {
+      navigate('/admin/login');
+    }
+  }, [navigate]);
 
   const fetchBookings = useCallback(async () => {
     setLoading(true);
@@ -88,6 +98,16 @@ const AdminPage = () => {
             </button>
             <button data-testid="admin-refresh-btn" onClick={fetchBookings} className="p-2 rounded-lg border border-[var(--ds-border)] text-gray-400 hover:text-white hover:border-gray-500 transition-colors">
               <RefreshCw size={16} />
+            </button>
+            <button
+              data-testid="admin-logout-btn"
+              onClick={() => {
+                sessionStorage.removeItem('adminAuth');
+                navigate('/admin/login');
+              }}
+              className="flex items-center gap-2 px-3 py-2 rounded-lg border border-red-500/30 text-red-400 hover:text-red-300 hover:border-red-500/50 transition-colors text-xs font-medium"
+            >
+              <LogOut size={14} /> Logout
             </button>
           </div>
         </div>

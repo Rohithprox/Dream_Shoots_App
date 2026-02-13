@@ -13,6 +13,7 @@ import BookingSection from "@/components/BookingSection";
 import Footer from "@/components/Footer";
 import WhatsAppButton from "@/components/WhatsAppButton";
 import AdminPage from "@/components/AdminPage";
+import AdminLogin from "@/components/AdminLogin";
 
 const LandingPage = () => {
   return (
@@ -36,6 +37,7 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<LandingPage />} />
+        <Route path="/admin/login" element={<AdminLogin onLogin={() => window.location.href = '/admin'} />} />
         <Route path="/admin" element={<AdminPage />} />
       </Routes>
     </BrowserRouter>
