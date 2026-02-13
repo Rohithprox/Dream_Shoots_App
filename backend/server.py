@@ -1,4 +1,4 @@
-from fastapi import FastAPI, APIRouter, HTTPException
+from fastapi import FastAPI, APIRouter, HTTPException, Header, Depends
 from dotenv import load_dotenv
 from starlette.middleware.cors import CORSMiddleware
 from motor.motor_asyncio import AsyncIOMotorClient
@@ -116,7 +116,7 @@ async def delete_reel(reel_id: str, authenticated: bool = Depends(verify_admin))
         raise HTTPException(status_code=404, detail="Reel not found")
     return {"message": "Reel deleted"}
 
-from fastapi import Header, Depends
+
 
 async def verify_admin(x_admin_token: Optional[str] = Header(None, alias="X-Admin-Token")):
     if ENVIRONMENT == 'production':
