@@ -4,10 +4,12 @@ FROM node:18-alpine as builder
 WORKDIR /app
 
 # Copy package files
-COPY package*.json ./
+# Diagnostic: check what's in the current context
+RUN ls -la
+COPY package*.json ./ || (ls -la .. && ls -la ../frontend && exit 1)
 
 # Install dependencies
-RUN npm ci
+RUN npm ci || (npm install && echo "npm ci failed, falling back to npm install")
 
 # Copy configuration and source files
 COPY . ./
