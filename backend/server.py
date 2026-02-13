@@ -35,6 +35,44 @@ else:
     cors_origins_list = ["*"]
     cors_allow_credentials = False
 
+class BookingCreate(BaseModel):
+    name: str
+    phone: str
+    preferred_date: str
+    preferred_time: str
+    event_type: str
+    important_info: Optional[str] = ""
+    selected_package: Optional[str] = ""
+    location: Optional[str] = ""
+
+class Booking(BaseModel):
+    model_config = ConfigDict(extra="ignore")
+    id: str = Field(default_factory=lambda: str(uuid.uuid4()))
+    name: str
+    phone: str
+    preferred_date: str
+    preferred_time: str
+    event_type: str
+    location: Optional[str] = ""
+    important_info: Optional[str] = ""
+    selected_package: Optional[str] = ""
+    status: str = "pending"
+    created_at: str = Field(default_factory=lambda: datetime.now(timezone.utc).isoformat())
+
+class BookingStatusUpdate(BaseModel):
+    status: str
+
+@api_router.get("/")
+async def root():
+    return {"message": "Dream Shoots API"}
+
+@api_router.post("/bookings", response_model=Booking)
+async def create_booking(input_data: BookingCreate):
+    booking = Booking(**input_data.model_dump())
+    doc = booking.model_dump()
+    await db.bookings.insert_one(doc)
+    return booking
+
 from fastapi import Header, Depends
 
 async def verify_admin(x_admin_token: Optional[str] = Header(None)):
