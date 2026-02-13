@@ -76,6 +76,16 @@ class Booking(BaseModel):
 class BookingStatusUpdate(BaseModel):
     status: str
 
+class ReelCreate(BaseModel):
+    url: str
+    title: Optional[str] = ""
+
+class Reel(BaseModel):
+    id: str = Field(default_factory=lambda: str(uuid.uuid4()))
+    url: str
+    title: Optional[str] = ""
+    created_at: str = Field(default_factory=lambda: datetime.now(timezone.utc).isoformat())
+
 @api_router.get("/")
 async def root():
     return {"message": "Dream Shoots API"}
@@ -86,6 +96,25 @@ async def create_booking(input_data: BookingCreate):
     doc = booking.model_dump()
     await db.bookings.insert_one(doc)
     return booking
+
+@api_router.get("/reels", response_model=List[Reel])
+async def get_reels():
+    reels = await db.reels.find({}, {"_id": 0}).sort("created_at", -1).to_list(100)
+    return reels
+
+@api_router.post("/reels", response_model=Reel)
+async def create_reel(input_data: ReelCreate, authenticated: bool = Depends(verify_admin)):
+    reel = Reel(**input_data.model_dump())
+    doc = reel.model_dump()
+    await db.reels.insert_one(doc)
+    return reel
+
+@api_router.delete("/reels/{reel_id}")
+async def delete_reel(reel_id: str, authenticated: bool = Depends(verify_admin)):
+    result = await db.reels.delete_one({"id": reel_id})
+    if result.deleted_count == 0:
+        raise HTTPException(status_code=404, detail="Reel not found")
+    return {"message": "Reel deleted"}
 
 from fastapi import Header, Depends
 

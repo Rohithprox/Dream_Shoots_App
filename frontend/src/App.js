@@ -11,6 +11,7 @@ import PricingSection from "@/components/PricingSection";
 import LocationsSection from "@/components/LocationsSection";
 import BookingSection from "@/components/BookingSection";
 import Footer from "@/components/Footer";
+import ReelsSection from "@/components/ReelsSection";
 import WhatsAppButton from "@/components/WhatsAppButton";
 import AdminPage from "@/components/AdminPage";
 import LoginPage from "@/components/LoginPage";
@@ -25,6 +26,7 @@ const LandingPage = () => {
       <AboutSection />
       <PricingSection />
       <Marquee />
+      <ReelsSection />
       <LocationsSection />
       <BookingSection />
       <Footer />
