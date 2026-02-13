@@ -27,13 +27,27 @@ CORS_ORIGINS = os.environ.get('CORS_ORIGINS')
 ADMIN_TOKEN = os.environ.get('ADMIN_TOKEN', 'ds-secret-token') # Should match frontend env
 
 # Parse CORS origins
+cors_origins_list = [
+    "https://www.dreamshoots.in",
+    "https://dreamshootsapp-production.up.railway.app",
+    "http://localhost:3000",
+    "http://localhost:8000"
+]
+
 if CORS_ORIGINS:
-    cors_origins_list = [origin.strip() for origin in CORS_ORIGINS.split(',')]
-    cors_allow_credentials = True
-else:
-    # Fallback: allow all origins when not explicitly configured
+    for origin in CORS_ORIGINS.split(','):
+        o = origin.strip()
+        if o and o not in cors_origins_list:
+            cors_origins_list.append(o)
+
+# If it's still just the defaults and no explicit origins were found, 
+# and we aren't in production, we could fallback to "*"
+if not CORS_ORIGINS and ENVIRONMENT != 'production':
     cors_origins_list = ["*"]
     cors_allow_credentials = False
+else:
+    # In production or if specified, we allow credentials with specific origins
+    cors_allow_credentials = True
 
 class BookingCreate(BaseModel):
     name: str
@@ -117,8 +131,6 @@ async def delete_booking(booking_id: str, authenticated: bool = Depends(verify_a
     return {"message": "Booking deleted"}
 
 
-app.include_router(api_router)
-
 # Configure CORS
 app.add_middleware(
     CORSMiddleware,
@@ -126,7 +138,10 @@ app.add_middleware(
     allow_origins=cors_origins_list,
     allow_methods=["*"],
     allow_headers=["*"],
+    expose_headers=["*"],
 )
+
+app.include_router(api_router)
 
 # Health check endpoint
 @app.get("/health")
