@@ -91,7 +91,7 @@ const Footer = () => {
               className="group transition-all hover:scale-110 active:scale-95"
             >
               <img
-                src="/TZYN MARK.png"
+                src="/Imagined and Crafted by TZYN final (1).png"
                 alt="TZYN Studio"
                 className="h-10 md:h-12 w-auto grayscale group-hover:grayscale-0 transition-all opacity-80 group-hover:opacity-100"
               />
