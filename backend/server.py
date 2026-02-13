@@ -89,9 +89,19 @@ async def create_booking(input_data: BookingCreate):
 
 from fastapi import Header, Depends
 
-async def verify_admin(x_admin_token: Optional[str] = Header(None)):
-    if ENVIRONMENT == 'production' and x_admin_token != ADMIN_TOKEN:
-        raise HTTPException(status_code=401, detail="Unauthorized")
+async def verify_admin(x_admin_token: Optional[str] = Header(None, alias="X-Admin-Token")):
+    if ENVIRONMENT == 'production':
+        if not x_admin_token:
+            logger.warning("Missing X-Admin-Token header")
+            raise HTTPException(status_code=401, detail="Unauthorized: Missing token")
+        
+        if x_admin_token != ADMIN_TOKEN:
+            # We don't log the full token for security, but we log the length and first/last char to help debug
+            received_desc = f"len={len(x_admin_token)}"
+            expected_desc = f"len={len(ADMIN_TOKEN)}"
+            logger.warning(f"Unauthorized: Token mismatch. Received {received_desc}, Expected {expected_desc}")
+            raise HTTPException(status_code=401, detail="Unauthorized: Token mismatch")
+    
     return True
 
 @api_router.get("/bookings", response_model=List[Booking])
