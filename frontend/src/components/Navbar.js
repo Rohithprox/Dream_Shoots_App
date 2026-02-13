@@ -34,7 +34,7 @@ const Navbar = () => {
           <img
             src="/Dream Shoots Logo.svg"
             alt="Dream Shoots"
-            className="h-20 md:h-24 w-auto"
+            className="h-14 md:h-16 w-auto"
           />
         </div>
 

@@ -79,7 +79,7 @@ const AdminPage = () => {
       <div className="max-w-7xl mx-auto mb-6">
         <div className="flex items-center justify-between flex-wrap gap-4">
           <div className="flex items-center gap-3">
-            <img src="/Dream Shoots Logo.svg" alt="Dream Shoots" className="h-12" />
+            <img src="/Dream Shoots Logo.svg" alt="Dream Shoots" className="h-10" />
             <span className="text-gray-500 text-sm font-medium">Admin Panel</span>
           </div>
           <div className="flex items-center gap-2">
