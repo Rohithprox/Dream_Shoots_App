@@ -15,17 +15,10 @@ const Footer = () => {
           <div className="flex flex-col items-center md:items-start space-y-4">
             <div className="flex items-center gap-2">
               <img
-                src="/Dream Shoots Logo.svg"
+                src="/Dream Shoots Logo FOOTER (1).png"
                 alt="Dream Shoots"
-                className="h-16 w-auto"
+                className="h-24 md:h-28 w-auto"
               />
-            </div>
-            <div className="flex items-center gap-4 w-full">
-              <div className="h-[1px] flex-grow bg-gradient-to-r from-transparent via-red-600 to-red-600"></div>
-              <span className="text-[10px] tracking-[0.2em] font-bold text-red-600 whitespace-nowrap uppercase">
-                Turning Moments into Memories
-              </span>
-              <div className="h-[1px] flex-grow bg-gradient-to-l from-transparent via-red-600 to-red-600"></div>
             </div>
           </div>
 
