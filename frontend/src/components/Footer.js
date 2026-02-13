@@ -10,14 +10,8 @@ const Footer = () => {
   return (
     <footer data-testid="footer" className="border-t border-[var(--ds-border)] pt-12 pb-6 md:pt-16 md:pb-8 px-4 md:px-4 bg-black overflow-hidden">
       <div className="max-w-6xl mx-auto">
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-10 mb-8 md:mb-12">
+        <div className="grid grid-cols-2 md:grid-cols-3 gap-6 md:gap-10 mb-8 md:mb-12">
           {/* Brand */}
-          <div className="col-span-2 md:col-span-1">
-            <div className="text-xl md:text-2xl font-bold text-[var(--ds-red)] mb-3 md:mb-4">Dream Shoots</div>
-            <p className="text-gray-400 text-xs md:text-sm leading-relaxed">
-              Fast shoots. Faster delivery. Professional content created by trained creators.
-            </p>
-          </div>
 
           {/* Quick Links */}
           <div className="col-span-1">
@@ -67,12 +61,12 @@ const Footer = () => {
               <a href="mailto:dreamshootsofficial@gmail.com" className="flex items-center gap-2 text-gray-400 hover:text-[var(--ds-red)] transition-colors footer-link text-xs md:text-sm">
                 <Mail size={12} className="text-[var(--ds-red)] hidden md:block" />
                 <Mail size={10} className="text-[var(--ds-red)] md:hidden" />
-                <span className="truncate">dreamshots@gmail.com</span>
+                <span className="truncate">dreamshootsofficial@gmail.com</span>
               </a>
               <a href="https://instagram.com/dreamshootsofficial" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-gray-400 hover:text-[var(--ds-red)] transition-colors footer-link text-xs md:text-sm">
                 <Instagram size={12} className="text-[var(--ds-red)] hidden md:block" />
                 <Instagram size={10} className="text-[var(--ds-red)] md:hidden" />
-                <span className="truncate">@dreamshots</span>
+                <span className="truncate">@dreamshootsofficial</span>
               </a>
             </div>
           </div>
