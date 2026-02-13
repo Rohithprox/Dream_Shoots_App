@@ -24,6 +24,7 @@ api_router = APIRouter(prefix="/api")
 ENVIRONMENT = os.environ.get('ENVIRONMENT', 'development')
 FRONTEND_URL = os.environ.get('FRONTEND_URL', 'http://localhost:3000')
 CORS_ORIGINS = os.environ.get('CORS_ORIGINS')
+ADMIN_TOKEN = os.environ.get('ADMIN_TOKEN', 'ds-secret-token') # Should match frontend env
 
 # Parse CORS origins
 if CORS_ORIGINS:
@@ -34,56 +35,21 @@ else:
     cors_origins_list = ["*"]
     cors_allow_credentials = False
 
+from fastapi import Header, Depends
 
-class BookingCreate(BaseModel):
-    name: str
-    phone: str
-    preferred_date: str
-    preferred_time: str
-    event_type: str
-    important_info: Optional[str] = ""
-    selected_package: Optional[str] = ""
-    location: Optional[str] = ""
-
-class Booking(BaseModel):
-    model_config = ConfigDict(extra="ignore")
-    id: str = Field(default_factory=lambda: str(uuid.uuid4()))
-    name: str
-    phone: str
-    preferred_date: str
-    preferred_time: str
-    event_type: str
-    location: Optional[str] = ""
-    important_info: Optional[str] = ""
-    selected_package: Optional[str] = ""
-    status: str = "pending"
-    created_at: str = Field(default_factory=lambda: datetime.now(timezone.utc).isoformat())
-
-class BookingStatusUpdate(BaseModel):
-    status: str
-
-
-@api_router.get("/")
-async def root():
-    return {"message": "Dream Shoots API"}
-
-
-@api_router.post("/bookings", response_model=Booking)
-async def create_booking(input_data: BookingCreate):
-    booking = Booking(**input_data.model_dump())
-    doc = booking.model_dump()
-    await db.bookings.insert_one(doc)
-    return booking
-
+async def verify_admin(x_admin_token: Optional[str] = Header(None)):
+    if ENVIRONMENT == 'production' and x_admin_token != ADMIN_TOKEN:
+        raise HTTPException(status_code=401, detail="Unauthorized")
+    return True
 
 @api_router.get("/bookings", response_model=List[Booking])
-async def get_bookings():
+async def get_bookings(authenticated: bool = Depends(verify_admin)):
     bookings = await db.bookings.find({}, {"_id": 0}).sort("created_at", -1).to_list(1000)
     return bookings
 
 
 @api_router.get("/bookings/{booking_id}", response_model=Booking)
-async def get_booking(booking_id: str):
+async def get_booking(booking_id: str, authenticated: bool = Depends(verify_admin)):
     booking = await db.bookings.find_one({"id": booking_id}, {"_id": 0})
     if not booking:
         raise HTTPException(status_code=404, detail="Booking not found")
@@ -91,7 +57,7 @@ async def get_booking(booking_id: str):
 
 
 @api_router.patch("/bookings/{booking_id}/status", response_model=Booking)
-async def update_booking_status(booking_id: str, update: BookingStatusUpdate):
+async def update_booking_status(booking_id: str, update: BookingStatusUpdate, authenticated: bool = Depends(verify_admin)):
     if update.status not in ["pending", "confirmed", "completed"]:
         raise HTTPException(status_code=400, detail="Invalid status. Must be pending, confirmed, or completed")
     result = await db.bookings.find_one_and_update(
@@ -106,7 +72,7 @@ async def update_booking_status(booking_id: str, update: BookingStatusUpdate):
 
 
 @api_router.delete("/bookings/{booking_id}")
-async def delete_booking(booking_id: str):
+async def delete_booking(booking_id: str, authenticated: bool = Depends(verify_admin)):
     result = await db.bookings.delete_one({"id": booking_id})
     if result.deleted_count == 0:
         raise HTTPException(status_code=404, detail="Booking not found")

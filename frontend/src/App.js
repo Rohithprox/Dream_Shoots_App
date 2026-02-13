@@ -13,6 +13,8 @@ import BookingSection from "@/components/BookingSection";
 import Footer from "@/components/Footer";
 import WhatsAppButton from "@/components/WhatsAppButton";
 import AdminPage from "@/components/AdminPage";
+import LoginPage from "@/components/LoginPage";
+import { Navigate } from "react-router-dom";
 
 const LandingPage = () => {
   return (
@@ -31,12 +33,18 @@ const LandingPage = () => {
   );
 };
 
+const ProtectedRoute = ({ children }) => {
+  const isAuthenticated = localStorage.getItem('ds_admin_auth') === 'true';
+  return isAuthenticated ? children : <Navigate to="/login" replace />;
+};
+
 function App() {
   return (
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<LandingPage />} />
-        <Route path="/admin" element={<AdminPage />} />
+        <Route path="/login" element={<LoginPage />} />
+        <Route path="/admin" element={<ProtectedRoute><AdminPage /></ProtectedRoute>} />
       </Routes>
     </BrowserRouter>
   );

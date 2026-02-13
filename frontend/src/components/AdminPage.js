@@ -5,6 +5,10 @@ import { Check, X, Clock, Trash2, RefreshCw, Download, Filter, CheckCircle } fro
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 const API = `${BACKEND_URL}/api`;
 
+const getAuthHeader = () => ({
+  headers: { 'X-Admin-Token': localStorage.getItem('ds_admin_token') }
+});
+
 const statusColors = {
   pending: 'bg-yellow-500/15 text-yellow-400 border-yellow-500/30',
   confirmed: 'bg-green-500/15 text-green-400 border-green-500/30',
@@ -20,7 +24,7 @@ const AdminPage = () => {
   const fetchBookings = useCallback(async () => {
     setLoading(true);
     try {
-      const res = await axios.get(`${API}/bookings`);
+      const res = await axios.get(`${API}/bookings`, getAuthHeader());
       setBookings(res.data);
     } catch (err) {
       console.error('Failed to fetch bookings', err);
@@ -32,7 +36,7 @@ const AdminPage = () => {
 
   const updateStatus = async (id, status) => {
     try {
-      await axios.patch(`${API}/bookings/${id}/status`, { status });
+      await axios.patch(`${API}/bookings/${id}/status`, { status }, getAuthHeader());
       fetchBookings();
     } catch (err) { console.error(err); }
   };
@@ -40,9 +44,15 @@ const AdminPage = () => {
   const deleteBooking = async (id) => {
     if (!window.confirm('Delete this booking?')) return;
     try {
-      await axios.delete(`${API}/bookings/${id}`);
+      await axios.delete(`${API}/bookings/${id}`, getAuthHeader());
       fetchBookings();
     } catch (err) { console.error(err); }
+  };
+
+  const handleLogout = () => {
+    localStorage.removeItem('ds_admin_auth');
+    localStorage.removeItem('ds_admin_token');
+    window.location.href = '/login';
   };
 
   const exportCSV = () => {
@@ -83,6 +93,12 @@ const AdminPage = () => {
             <span className="text-gray-500 text-sm font-medium">Admin Panel</span>
           </div>
           <div className="flex items-center gap-2">
+            <button
+              onClick={handleLogout}
+              className="px-3 py-2 rounded-lg border border-red-900/30 text-red-500 hover:bg-red-500/10 transition-colors text-xs font-medium mr-2"
+            >
+              Logout
+            </button>
             <button data-testid="admin-export-btn" onClick={exportCSV} className="flex items-center gap-2 px-3 py-2 rounded-lg border border-[var(--ds-border)] text-gray-400 hover:text-white hover:border-gray-500 transition-colors text-xs font-medium">
               <Download size={14} /> Export CSV
             </button>
