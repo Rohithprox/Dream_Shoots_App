@@ -87,7 +87,7 @@ const Footer = () => {
           <div className="flex items-center gap-2">
             <span className="text-gray-600 text-[10px] uppercase tracking-wider">Created, Designed & Developed by</span>
             <a href="https://tzynstudio.com/" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 group">
-              <img src="/Dream Shoots Logo.svg" alt="TYZN Studio" className="h-6 w-auto opacity-70 group-hover:opacity-100 transition-opacity" />
+              <img src="/TZYN MARK.png" alt="TYZN Studio" className="h-6 w-auto opacity-70 group-hover:opacity-100 transition-opacity" />
               <span className="text-gray-400 group-hover:text-white text-xs font-bold transition-colors">TYZN STUDIO</span>
             </a>
           </div>
