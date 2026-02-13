@@ -43,6 +43,7 @@ class BookingCreate(BaseModel):
     event_type: str
     important_info: Optional[str] = ""
     selected_package: Optional[str] = ""
+    location: Optional[str] = ""
 
 class Booking(BaseModel):
     model_config = ConfigDict(extra="ignore")
@@ -52,6 +53,7 @@ class Booking(BaseModel):
     preferred_date: str
     preferred_time: str
     event_type: str
+    location: Optional[str] = ""
     important_info: Optional[str] = ""
     selected_package: Optional[str] = ""
     status: str = "pending"

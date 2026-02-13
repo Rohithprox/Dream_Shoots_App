@@ -12,6 +12,7 @@ const BookingSection = () => {
     preferred_date: '',
     preferred_time: '',
     event_type: '',
+    location: '',
     important_info: '',
   });
   const [loading, setLoading] = useState(false);
@@ -30,7 +31,7 @@ const BookingSection = () => {
     try {
       await axios.post(`${API}/bookings`, form);
       setSuccess(true);
-      setForm({ name: '', phone: '', preferred_date: '', preferred_time: '', event_type: '', important_info: '' });
+      setForm({ name: '', phone: '', preferred_date: '', preferred_time: '', event_type: '', location: '', important_info: '' });
     } catch (err) {
       setError('Something went wrong. Please try again.');
     }
@@ -91,13 +92,19 @@ const BookingSection = () => {
                 <input data-testid="booking-time-input" type="time" name="preferred_time" value={form.preferred_time} onChange={handleChange} required className="ds-input" />
               </div>
             </div>
-            <div>
-              <label className="ds-label"><MapPin size={14} className="text-[var(--ds-red)]" /> Event Type *</label>
-              <input data-testid="booking-event-type-input" type="text" name="event_type" value={form.event_type} onChange={handleChange} placeholder="Wedding, Corporate Event, Product Launch, etc." required className="ds-input" />
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div>
+                <label className="ds-label"><MapPin size={14} className="text-[var(--ds-red)]" /> Event Type *</label>
+                <input data-testid="booking-event-type-input" type="text" name="event_type" value={form.event_type} onChange={handleChange} placeholder="Wedding, etc." required className="ds-input" />
+              </div>
+              <div>
+                <label className="ds-label"><MapPin size={14} className="text-[var(--ds-red)]" /> Location *</label>
+                <input data-testid="booking-location-input" type="text" name="location" value={form.location} onChange={handleChange} placeholder="City, Area, etc." required className="ds-input" />
+              </div>
             </div>
             <div>
               <label className="ds-label"><FileText size={14} className="text-[var(--ds-red)]" /> Any Important Information</label>
-              <textarea data-testid="booking-info-textarea" name="important_info" value={form.important_info} onChange={handleChange} placeholder="Location, special requests, preferred package, etc." rows={3} className="ds-input resize-none" />
+              <textarea data-testid="booking-info-textarea" name="important_info" value={form.important_info} onChange={handleChange} placeholder="Special requests, preferred package, etc." rows={3} className="ds-input resize-none" />
             </div>
             {error && <p data-testid="booking-error" className="text-red-500 text-sm">{error}</p>}
             <button data-testid="confirm-booking-btn" type="submit" disabled={loading} className="btn-red w-full justify-center text-sm py-4 rounded-lg">

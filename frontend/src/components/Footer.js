@@ -79,12 +79,28 @@ const Footer = () => {
         </div>
 
         {/* Bottom bar */}
-        <div className="border-t border-[var(--ds-border)] pt-4 md:pt-6 flex flex-col md:flex-row items-center justify-between gap-2 md:gap-4">
-          <p className="text-gray-500 text-xs text-center md:text-left">
+        <div className="border-t border-[var(--ds-border)] pt-4 md:pt-6 flex flex-col md:flex-row items-center justify-between gap-4">
+          <p className="text-gray-500 text-[10px] md:text-xs text-center md:text-left">
             &copy; {new Date().getFullYear()} Dream Shoots. All rights reserved.
           </p>
-          <p className="text-gray-500 text-xs text-center">
-            Capturing your moments. Creating your memories.
+          <a
+            href="https://tzynstudio.com/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="group flex items-center gap-2 bg-[#111] border border-[#222] px-4 py-2 rounded-full hover:border-[#444] transition-all"
+          >
+            <span className="text-gray-400 text-[10px] md:text-xs">Created, Designed and Developed by</span>
+            <div className="flex items-center gap-1.5">
+              <img
+                src="/TZYN MARK.png"
+                alt="TYZN Studio"
+                className="h-4 w-auto grayscale group-hover:grayscale-0 transition-all opacity-70 group-hover:opacity-100"
+              />
+              <span className="text-white font-bold text-[10px] md:text-xs tracking-widest uppercase">TYZN Studio</span>
+            </div>
+          </a>
+          <p className="text-gray-500 text-[10px] md:text-xs text-center">
+            Capturing your moments.
           </p>
         </div>
       </div>
