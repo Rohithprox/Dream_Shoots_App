@@ -6,11 +6,8 @@ WORKDIR /app
 # Copy everything from the context
 COPY . .
 
-# Diagnostic: what was copied?
-RUN ls -la
-
-# Install dependencies
-RUN npm ci || (npm install && echo "npm ci failed, falling back to npm install")
+# Install dependencies (use legacy-peer-deps to resolve react-day-picker/date-fns conflict)
+RUN npm install --legacy-peer-deps
 
 # Build the application
 ARG REACT_APP_BACKEND_URL
