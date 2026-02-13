@@ -46,10 +46,10 @@ const AdminPage = () => {
   };
 
   const exportCSV = () => {
-    const headers = ['Name', 'Phone', 'Date', 'Time', 'Event', 'Package', 'Status', 'Notes', 'Booked On'];
+    const headers = ['Name', 'Phone', 'Date', 'Time', 'Event', 'Location', 'Package', 'Status', 'Notes', 'Booked On'];
     const rows = bookings.map((b) => [
       b.name, b.phone, b.preferred_date, b.preferred_time, b.event_type,
-      b.selected_package || '-', b.status, b.important_info || '-',
+      b.location || '-', b.selected_package || '-', b.status, b.important_info || '-',
       new Date(b.created_at).toLocaleString(),
     ]);
     const csv = [headers, ...rows].map((r) => r.map((c) => `"${c}"`).join(',')).join('\n');
@@ -157,7 +157,7 @@ const AdminPage = () => {
               <table data-testid="admin-bookings-table" className="w-full">
                 <thead>
                   <tr className="border-b border-[var(--ds-border)]">
-                    {['Name', 'Phone', 'Date', 'Time', 'Event', 'Status', 'Actions'].map((h) => (
+                    {['Name', 'Phone', 'Date', 'Time', 'Event', 'Location', 'Status', 'Actions'].map((h) => (
                       <th key={h} className="text-left text-gray-500 text-[10px] uppercase tracking-wider font-bold py-3 px-4">{h}</th>
                     ))}
                   </tr>
@@ -173,6 +173,7 @@ const AdminPage = () => {
                       <td className="py-3 px-4 text-gray-300 text-sm">{b.preferred_date}</td>
                       <td className="py-3 px-4 text-gray-300 text-sm">{b.preferred_time}</td>
                       <td className="py-3 px-4 text-gray-300 text-sm">{b.event_type}</td>
+                      <td className="py-3 px-4 text-gray-300 text-sm">{b.location || '-'}</td>
                       <td className="py-3 px-4">
                         <span className={`px-2.5 py-1 rounded-full text-[10px] font-bold border capitalize ${statusColors[b.status] || statusColors.pending}`}>
                           {b.status}
@@ -223,6 +224,7 @@ const AdminPage = () => {
                     <div><span className="text-gray-600 text-xs">Date:</span> <span className="text-gray-300">{b.preferred_date}</span></div>
                     <div><span className="text-gray-600 text-xs">Time:</span> <span className="text-gray-300">{b.preferred_time}</span></div>
                     <div className="col-span-2"><span className="text-gray-600 text-xs">Event:</span> <span className="text-gray-300">{b.event_type}</span></div>
+                    <div className="col-span-2"><span className="text-gray-600 text-xs">Location:</span> <span className="text-gray-300">{b.location || '-'}</span></div>
                   </div>
                   {b.important_info && (
                     <div className="text-gray-500 text-xs mb-3 border-t border-[var(--ds-border)] pt-2">{b.important_info}</div>

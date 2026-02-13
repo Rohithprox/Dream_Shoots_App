@@ -79,11 +79,20 @@ const Footer = () => {
         </div>
 
         {/* Bottom bar */}
-        <div className="border-t border-[var(--ds-border)] pt-4 md:pt-6 flex flex-col md:flex-row items-center justify-between gap-2 md:gap-4">
+        <div className="border-t border-[var(--ds-border)] pt-4 md:pt-6 flex flex-col md:flex-row items-center justify-between gap-4">
           <p className="text-gray-500 text-xs text-center md:text-left">
             &copy; {new Date().getFullYear()} Dream Shoots. All rights reserved.
           </p>
-          <p className="text-gray-500 text-xs text-center">
+
+          <div className="flex items-center gap-2">
+            <span className="text-gray-600 text-[10px] uppercase tracking-wider">Created, Designed & Developed by</span>
+            <a href="https://tzynstudio.com/" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 group">
+              <img src="/tyzn_studio.png" alt="TYZN Studio" className="h-6 w-auto opacity-70 group-hover:opacity-100 transition-opacity" />
+              <span className="text-gray-400 group-hover:text-white text-xs font-bold transition-colors">TYZN STUDIO</span>
+            </a>
+          </div>
+
+          <p className="text-gray-500 text-xs text-center hidden md:block">
             Capturing your moments. Creating your memories.
           </p>
         </div>

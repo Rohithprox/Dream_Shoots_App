@@ -35,7 +35,7 @@ const Navbar = () => {
           <img
             src="/dreamshoots-logo.png"
             alt="Dream Shoots"
-            className="h-10 md:h-12 w-auto"
+            className="h-16 md:h-20 w-auto"
           />
         </div>
 
@@ -50,13 +50,6 @@ const Navbar = () => {
               {item}
             </button>
           ))}
-          <button
-            data-testid="nav-admin"
-            onClick={() => navigate('/admin')}
-            className="flex items-center gap-1.5 text-sm text-gray-400 hover:text-white transition-colors font-medium tracking-wide"
-          >
-            <Shield size={14} /> Admin
-          </button>
           <button
             data-testid="nav-book-a-shoot"
             onClick={() => scrollTo('contact')}
@@ -86,12 +79,6 @@ const Navbar = () => {
               {item}
             </button>
           ))}
-          <button
-            onClick={() => navigate('/admin')}
-            className="block w-full text-left text-gray-300 hover:text-white py-2 font-medium flex items-center gap-2"
-          >
-            <Shield size={14} /> Admin
-          </button>
           <button
             onClick={() => scrollTo('contact')}
             className="btn-red w-full text-center justify-center text-xs py-3"

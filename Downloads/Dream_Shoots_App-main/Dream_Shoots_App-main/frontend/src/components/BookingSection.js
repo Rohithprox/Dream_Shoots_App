@@ -13,6 +13,7 @@ const BookingSection = () => {
     preferred_time: '',
     event_type: '',
     important_info: '',
+    location: '',
   });
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
@@ -94,6 +95,10 @@ const BookingSection = () => {
             <div>
               <label className="ds-label"><MapPin size={14} className="text-[var(--ds-red)]" /> Event Type *</label>
               <input data-testid="booking-event-type-input" type="text" name="event_type" value={form.event_type} onChange={handleChange} placeholder="Wedding, Corporate Event, Product Launch, etc." required className="ds-input" />
+            </div>
+            <div>
+              <label className="ds-label"><MapPin size={14} className="text-[var(--ds-red)]" /> Location *</label>
+              <input data-testid="booking-location-input" type="text" name="location" value={form.location} onChange={handleChange} placeholder="City, Venue, or Address" required className="ds-input" />
             </div>
             <div>
               <label className="ds-label"><FileText size={14} className="text-[var(--ds-red)]" /> Any Important Information</label>

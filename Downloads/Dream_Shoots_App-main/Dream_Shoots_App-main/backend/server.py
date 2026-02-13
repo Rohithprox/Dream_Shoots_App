@@ -37,6 +37,7 @@ class BookingCreate(BaseModel):
     event_type: str
     important_info: Optional[str] = ""
     selected_package: Optional[str] = ""
+    location: Optional[str] = ""
 
 class Booking(BaseModel):
     model_config = ConfigDict(extra="ignore")
@@ -48,6 +49,7 @@ class Booking(BaseModel):
     event_type: str
     important_info: Optional[str] = ""
     selected_package: Optional[str] = ""
+    location: Optional[str] = ""
     status: str = "pending"
     created_at: str = Field(default_factory=lambda: datetime.now(timezone.utc).isoformat())
 
