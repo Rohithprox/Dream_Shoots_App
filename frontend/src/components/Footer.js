@@ -23,9 +23,9 @@ const Footer = () => {
           </div>
 
           {/* Quick Links Column */}
-          <div className="flex flex-col items-center md:items-center space-y-6">
+          <div className="flex flex-col items-start md:items-start space-y-6">
             <h4 className="text-sm font-bold tracking-widest uppercase mb-2">Quick Links</h4>
-            <div className="flex flex-col items-center md:items-center space-y-4">
+            <div className="flex flex-col items-start md:items-start space-y-4">
               {[
                 { label: 'About Us', id: 'about' },
                 { label: 'Pricing', id: 'pricing' },
@@ -35,7 +35,7 @@ const Footer = () => {
                 <button
                   key={link.id}
                   onClick={() => scrollTo(link.id)}
-                  className="text-center text-gray-500 hover:text-white transition-colors text-xs font-medium"
+                  className="text-left text-gray-500 hover:text-white transition-colors text-xs font-medium"
                 >
                   {link.label}
                 </button>
@@ -44,9 +44,9 @@ const Footer = () => {
           </div>
 
           {/* Locations Column */}
-          <div className="flex flex-col items-center md:items-center space-y-6">
+          <div className="flex flex-col items-start md:items-start space-y-6">
             <h4 className="text-sm font-bold tracking-widest uppercase mb-2">Locations</h4>
-            <div className="flex flex-col items-center md:items-center space-y-4">
+            <div className="flex flex-col items-start md:items-start space-y-4">
               {['Nellore', 'Hyderabad', 'Vijayawada', 'Ongole', 'Tirupati'].map((city) => (
                 <div key={city} className="flex items-center gap-3 text-gray-500 text-xs font-medium">
                   <MapPin size={14} className="text-red-600 fill-red-600/20" />
@@ -57,9 +57,9 @@ const Footer = () => {
           </div>
 
           {/* Get in Touch Column */}
-          <div className="flex flex-col items-center md:items-center space-y-6">
+          <div className="flex flex-col items-start md:items-start space-y-6">
             <h4 className="text-sm font-bold tracking-widest uppercase mb-2">Get in Touch</h4>
-            <div className="flex flex-col items-center md:items-center space-y-4">
+            <div className="flex flex-col items-start md:items-start space-y-4">
               <a href="tel:+917330858705" className="flex items-center gap-3 text-gray-500 hover:text-white transition-colors text-xs font-medium">
                 <Phone size={14} className="text-red-600 fill-red-600/20" />
                 +91 73308 58705
