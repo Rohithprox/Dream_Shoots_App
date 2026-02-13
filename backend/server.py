@@ -24,7 +24,7 @@ api_router = APIRouter(prefix="/api")
 ENVIRONMENT = os.environ.get('ENVIRONMENT', 'development')
 FRONTEND_URL = os.environ.get('FRONTEND_URL', 'http://localhost:3000')
 CORS_ORIGINS = os.environ.get('CORS_ORIGINS')
-ADMIN_TOKEN = os.environ.get('ADMIN_TOKEN', 'ds-secret-token') # Should match frontend env
+ADMIN_TOKEN = os.environ.get('ADMIN_TOKEN', 'ds-secret-token').strip().replace('"', '').replace("'", "")
 
 # Parse CORS origins
 cors_origins_list = [

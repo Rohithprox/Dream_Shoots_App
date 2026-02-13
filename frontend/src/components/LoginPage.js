@@ -8,13 +8,15 @@ const LoginPage = () => {
     const [error, setError] = useState('');
     const navigate = useNavigate();
 
+    const sanitize = (val) => val ? val.trim().replace(/['"]/g, '') : '';
+
     const handleLogin = (e) => {
         e.preventDefault();
 
         // Credentials from environment variables
-        const adminUser = process.env.REACT_APP_ADMIN_USERNAME || 'admin';
-        const adminPass = process.env.REACT_APP_ADMIN_PASSWORD || 'password';
-        const adminToken = process.env.REACT_APP_ADMIN_TOKEN || 'ds-secret-token';
+        const adminUser = sanitize(process.env.REACT_APP_ADMIN_USERNAME || 'admin');
+        const adminPass = sanitize(process.env.REACT_APP_ADMIN_PASSWORD || 'password');
+        const adminToken = sanitize(process.env.REACT_APP_ADMIN_TOKEN || 'ds-secret-token');
 
         if (username === adminUser && password === adminPass) {
             localStorage.setItem('ds_admin_auth', 'true');
