@@ -23,8 +23,16 @@ const ReelsSection = () => {
         fetchReels();
     }, []);
 
+    useEffect(() => {
+        // Process Instagram embeds whenever reels change
+        if (window.instgrm && window.instgrm.Embeds) {
+            window.instgrm.Embeds.process();
+        }
+    }, [reels]);
+
     const getEmbedUrl = (url) => {
-        const match = url.match(/(?:reels|p)\/([^\/?#&]+)/);
+        // Support /reel/, /reels/, /p/, /tv/
+        const match = url.match(/(?:reels|reel|p|tv)\/([^\/?#&]+)/);
         if (match && match[1]) {
             return `https://www.instagram.com/p/${match[1]}/embed`;
         }
