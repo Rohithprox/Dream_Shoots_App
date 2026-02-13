@@ -131,18 +131,6 @@ async def delete_booking(booking_id: str, authenticated: bool = Depends(verify_a
     return {"message": "Booking deleted"}
 
 
-# Configure CORS
-app.add_middleware(
-    CORSMiddleware,
-    allow_credentials=cors_allow_credentials,
-    allow_origins=cors_origins_list,
-    allow_methods=["*"],
-    allow_headers=["*"],
-    expose_headers=["*"],
-)
-
-app.include_router(api_router)
-
 # Health check endpoint
 @app.get("/health")
 async def health_check():
