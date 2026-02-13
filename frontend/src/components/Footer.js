@@ -83,21 +83,20 @@ const Footer = () => {
           <p className="text-gray-500 text-[10px] md:text-xs text-center md:text-left">
             &copy; {new Date().getFullYear()} Dream Shoots. All rights reserved.
           </p>
-          <a
-            href="https://tzynstudio.com/"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="group flex items-center gap-2 bg-[#111] border border-[#222] px-4 py-2 rounded-full hover:border-[#444] transition-all"
-          >
-            <span className="text-gray-400 text-[10px] md:text-xs">Created, Designed and Developed by</span>
-            <div className="flex items-center">
+          <div className="flex items-center justify-center">
+            <a
+              href="https://tzynstudio.com/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group transition-all hover:scale-110 active:scale-95"
+            >
               <img
                 src="/TZYN MARK.png"
-                alt="TYZN Studio"
-                className="h-8 md:h-10 w-auto grayscale group-hover:grayscale-0 transition-all opacity-80 group-hover:opacity-100"
+                alt="TZYN Studio"
+                className="h-10 md:h-12 w-auto grayscale group-hover:grayscale-0 transition-all opacity-80 group-hover:opacity-100"
               />
-            </div>
-          </a>
+            </a>
+          </div>
           <p className="text-gray-500 text-[10px] md:text-xs text-center">
             Capturing your moments.
           </p>
