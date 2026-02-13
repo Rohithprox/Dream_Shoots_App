@@ -32,9 +32,9 @@ const Navbar = () => {
           onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
         >
           <img
-            src="/dreamshoots-logo.png"
+            src="/Dream Shoots Logo.svg"
             alt="Dream Shoots"
-            className="h-28 md:h-32 w-auto"
+            className="h-20 md:h-24 w-auto"
           />
         </div>
 
