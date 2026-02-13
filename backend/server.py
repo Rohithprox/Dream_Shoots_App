@@ -86,6 +86,21 @@ class Reel(BaseModel):
     title: Optional[str] = ""
     created_at: str = Field(default_factory=lambda: datetime.now(timezone.utc).isoformat())
 
+async def verify_admin(x_admin_token: Optional[str] = Header(None, alias="X-Admin-Token")):
+    if ENVIRONMENT == 'production':
+        if not x_admin_token:
+            logger.warning("Missing X-Admin-Token header")
+            raise HTTPException(status_code=401, detail="Unauthorized: Missing token")
+        
+        if x_admin_token != ADMIN_TOKEN:
+            # We don't log the full token for security, but we log the length and first/last char to help debug
+            received_desc = f"len={len(x_admin_token)}" if x_admin_token else "None"
+            expected_desc = f"len={len(ADMIN_TOKEN)}" if ADMIN_TOKEN else "None"
+            logger.warning(f"Unauthorized: Token mismatch. Received {received_desc}, Expected {expected_desc}")
+            raise HTTPException(status_code=401, detail="Unauthorized: Token mismatch")
+    
+    return True
+
 @api_router.get("/")
 async def root():
     return {"message": "Dream Shoots API"}
@@ -118,20 +133,7 @@ async def delete_reel(reel_id: str, authenticated: bool = Depends(verify_admin))
 
 
 
-async def verify_admin(x_admin_token: Optional[str] = Header(None, alias="X-Admin-Token")):
-    if ENVIRONMENT == 'production':
-        if not x_admin_token:
-            logger.warning("Missing X-Admin-Token header")
-            raise HTTPException(status_code=401, detail="Unauthorized: Missing token")
-        
-        if x_admin_token != ADMIN_TOKEN:
-            # We don't log the full token for security, but we log the length and first/last char to help debug
-            received_desc = f"len={len(x_admin_token)}"
-            expected_desc = f"len={len(ADMIN_TOKEN)}"
-            logger.warning(f"Unauthorized: Token mismatch. Received {received_desc}, Expected {expected_desc}")
-            raise HTTPException(status_code=401, detail="Unauthorized: Token mismatch")
-    
-    return True
+
 
 @api_router.get("/bookings", response_model=List[Booking])
 async def get_bookings(authenticated: bool = Depends(verify_admin)):
