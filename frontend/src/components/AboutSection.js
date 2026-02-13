@@ -20,7 +20,7 @@ const AboutSection = () => {
           </span>
         </div>
         <h2 className="section-heading text-center text-4xl md:text-5xl mb-16">
-          About <span className="text-[var(--ds-red)]" style={{ fontStyle: 'italic' }}>DREAM SHOOTS</span>
+          About <span className="text-[var(--ds-red)] font-bold" style={{ fontStyle: 'italic' }}>DREAM SHOOTS</span>
         </h2>
         <p className="text-center text-gray-400 max-w-2xl mx-auto mb-16 text-base">
           Dream Shoots helps businesses create quality content quickly by connecting them with trained creators. Built for speed, simplicity, and reliability.
@@ -68,7 +68,7 @@ const AboutSection = () => {
             <button
               data-testid="read-our-story-btn"
               className="btn-red text-sm"
-              onClick={() => {}}
+              onClick={() => { }}
             >
               <Zap size={16} fill="white" /> READ OUR STORY
             </button>
