@@ -12,17 +12,10 @@ const AboutSection = () => {
     <section id="about" data-testid="about-section" className="py-20 px-4">
       <div className="max-w-6xl mx-auto">
         {/* Section label */}
-        <div className="text-center mb-4">
-          <span
-            className="inline-block px-5 py-2 rounded-full border border-[var(--ds-red)] text-[var(--ds-red)] text-xs font-semibold tracking-widest uppercase"
-          >
-            About Us
-          </span>
-        </div>
-        <h2 className="section-heading text-center text-4xl md:text-5xl mb-16">
+        <h2 className="section-heading text-center text-4xl md:text-5xl mb-6">
           About <span className="text-[var(--ds-red)] font-bold" style={{ fontStyle: 'italic' }}>DREAM SHOOTS</span>
         </h2>
-        <p className="text-center text-gray-400 max-w-2xl mx-auto mb-16 text-base">
+        <p className="text-center text-gray-400 max-w-2xl mx-auto mb-12 text-base">
           Dream Shoots helps businesses create quality content quickly by connecting them with trained creators. Built for speed, simplicity, and reliability.
         </p>
 
