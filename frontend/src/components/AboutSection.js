@@ -9,7 +9,7 @@ const aboutFeatures = [
 
 const AboutSection = () => {
   return (
-    <section id="about" data-testid="about-section" className="py-20 px-4">
+    <section id="about" data-testid="about-section" className="py-10 px-4">
       <div className="max-w-6xl mx-auto">
         {/* Section label */}
         <h2 className="section-heading text-center text-4xl md:text-5xl mb-6">
@@ -58,13 +58,6 @@ const AboutSection = () => {
             <p className="text-gray-400 text-base mb-8 leading-relaxed">
               Our network of trained creators is ready to bring your vision to life. From concept to delivery, we handle everything so you can focus on what matters most - growing your brand.
             </p>
-            <button
-              data-testid="read-our-story-btn"
-              className="btn-red text-sm"
-              onClick={() => { }}
-            >
-              <Zap size={16} fill="white" /> READ OUR STORY
-            </button>
           </div>
         </div>
       </div>

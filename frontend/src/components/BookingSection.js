@@ -39,7 +39,7 @@ const BookingSection = () => {
   };
 
   return (
-    <section id="contact" data-testid="booking-section" className="py-20 px-4 border-t border-[var(--ds-border)]">
+    <section id="contact" data-testid="booking-section" className="py-10 px-4 border-t border-[var(--ds-border)]">
       <div className="max-w-3xl mx-auto">
         <div className="text-center mb-4">
           <span className="inline-flex items-center gap-2 px-5 py-2 rounded-full border border-[var(--ds-red)] text-[var(--ds-red)] text-xs font-bold tracking-widest uppercase">

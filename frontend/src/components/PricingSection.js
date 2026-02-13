@@ -94,7 +94,7 @@ const PricingSection = () => {
   const plans = activeTab === 'studio' ? studioPlans : activeTab === 'corporate' ? corporatePlans : weddingPlans;
 
   return (
-    <section id="pricing" data-testid="pricing-section" className="py-20 px-4">
+    <section id="pricing" data-testid="pricing-section" className="py-10 px-4">
       <div className="max-w-6xl mx-auto">
         <h2 className="text-center text-4xl md:text-5xl font-extrabold mb-3 tracking-tight">
           {activeTab === 'wedding' ? (
@@ -116,9 +116,8 @@ const PricingSection = () => {
               key={t.key}
               data-testid={`pricing-tab-${t.key}`}
               onClick={() => setActiveTab(t.key)}
-              className={`pricing-tab flex items-center gap-2 ${
-                activeTab === t.key ? 'pricing-tab-active' : 'pricing-tab-inactive'
-              }`}
+              className={`pricing-tab flex items-center gap-2 ${activeTab === t.key ? 'pricing-tab-active' : 'pricing-tab-inactive'
+                }`}
             >
               {t.icon} {t.label}
             </button>
@@ -126,18 +125,16 @@ const PricingSection = () => {
         </div>
 
         {/* Plans grid */}
-        <div className={`grid gap-6 ${
-          plans.length <= 2 ? 'grid-cols-1 md:grid-cols-2 max-w-3xl mx-auto' :
-          plans.length === 3 ? 'grid-cols-1 md:grid-cols-3' :
-          'grid-cols-1 sm:grid-cols-2 lg:grid-cols-4'
-        }`}>
+        <div className={`grid gap-6 ${plans.length <= 2 ? 'grid-cols-1 md:grid-cols-2 max-w-3xl mx-auto' :
+            plans.length === 3 ? 'grid-cols-1 md:grid-cols-3' :
+              'grid-cols-1 sm:grid-cols-2 lg:grid-cols-4'
+          }`}>
           {plans.map((pkg, i) => (
             <div
               key={`${activeTab}-${i}`}
               data-testid={`pricing-card-${activeTab}-${i}`}
-              className={`relative bg-[var(--ds-card)] border rounded-xl p-6 flex flex-col transition-all duration-300 hover:border-[rgba(220,38,38,0.4)] ${
-                pkg.popular ? 'border-[var(--ds-red)] red-glow' : 'border-[var(--ds-border)]'
-              }`}
+              className={`relative bg-[var(--ds-card)] border rounded-xl p-6 flex flex-col transition-all duration-300 hover:border-[rgba(220,38,38,0.4)] ${pkg.popular ? 'border-[var(--ds-red)] red-glow' : 'border-[var(--ds-border)]'
+                }`}
             >
               {pkg.popular && (
                 <div
@@ -178,11 +175,10 @@ const PricingSection = () => {
               <button
                 data-testid={`pricing-book-btn-${activeTab}-${i}`}
                 onClick={scrollToContact}
-                className={`w-full py-3 rounded-lg font-bold text-sm tracking-wider uppercase transition-all ${
-                  pkg.popular
+                className={`w-full py-3 rounded-lg font-bold text-sm tracking-wider uppercase transition-all ${pkg.popular
                     ? 'bg-[var(--ds-red)] hover:bg-[var(--ds-red-dark)] text-white'
                     : 'bg-transparent border border-[var(--ds-border)] text-gray-300 hover:border-[var(--ds-red)] hover:text-white'
-                }`}
+                  }`}
               >
                 Book A Shoot
               </button>

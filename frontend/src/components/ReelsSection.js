@@ -43,7 +43,7 @@ const ReelsSection = () => {
     if (!loading && reels.length === 0) return null;
 
     return (
-        <section id="reels" className="py-20 bg-black overflow-hidden">
+        <section id="reels" className="py-10 bg-black overflow-hidden">
             <div className="max-w-7xl mx-auto px-4">
                 <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
                     <div>

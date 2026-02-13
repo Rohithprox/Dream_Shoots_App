@@ -11,7 +11,7 @@ const locations = [
 
 const LocationsSection = () => {
   return (
-    <section id="locations" data-testid="locations-section" className="py-20 px-4">
+    <section id="locations" data-testid="locations-section" className="py-10 px-4">
       <div className="max-w-5xl mx-auto">
         <div className="text-center mb-4">
           <span className="inline-flex items-center gap-2 px-5 py-2 rounded-full border border-[var(--ds-red)] text-[var(--ds-red)] text-xs font-bold tracking-widest uppercase">
