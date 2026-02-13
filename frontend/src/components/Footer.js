@@ -90,13 +90,12 @@ const Footer = () => {
             className="group flex items-center gap-2 bg-[#111] border border-[#222] px-4 py-2 rounded-full hover:border-[#444] transition-all"
           >
             <span className="text-gray-400 text-[10px] md:text-xs">Created, Designed and Developed by</span>
-            <div className="flex items-center gap-1.5">
+            <div className="flex items-center">
               <img
                 src="/TZYN MARK.png"
                 alt="TYZN Studio"
-                className="h-4 w-auto grayscale group-hover:grayscale-0 transition-all opacity-70 group-hover:opacity-100"
+                className="h-8 md:h-10 w-auto grayscale group-hover:grayscale-0 transition-all opacity-80 group-hover:opacity-100"
               />
-              <span className="text-white font-bold text-[10px] md:text-xs tracking-widest uppercase">TYZN Studio</span>
             </div>
           </a>
           <p className="text-gray-500 text-[10px] md:text-xs text-center">
