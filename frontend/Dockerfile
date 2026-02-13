@@ -10,13 +10,7 @@ COPY package*.json ./
 RUN npm ci
 
 # Copy configuration and source files
-COPY src ./src
-COPY public ./public
-COPY craco.config.js ./
-COPY tailwind.config.js ./
-COPY postcss.config.js ./
-COPY jsconfig.json ./
-COPY components.json ./
+COPY . ./
 
 # Build the application
 ARG REACT_APP_BACKEND_URL=https://api.yourdomain.com
