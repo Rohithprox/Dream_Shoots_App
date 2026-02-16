@@ -29,6 +29,7 @@ ADMIN_TOKEN = os.environ.get('ADMIN_TOKEN', 'ds-secret-token').strip().replace('
 # Parse CORS origins
 cors_origins_list = [
     "https://www.dreamshoots.in",
+    "https://dreamshoots.in",
     "https://dreamshootsapp-production.up.railway.app",
     "http://localhost:3000",
     "http://localhost:8000"

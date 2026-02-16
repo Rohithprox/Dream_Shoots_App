@@ -33,7 +33,9 @@ const BookingSection = () => {
       setSuccess(true);
       setForm({ name: '', phone: '', preferred_date: '', preferred_time: '', event_type: '', location: '', important_info: '' });
     } catch (err) {
-      setError('Something went wrong. Please try again.');
+      console.error('Booking Error:', err);
+      const msg = err.response?.data?.detail || err.message || 'Connection failed';
+      setError(`Issue: ${msg}. If on mobile data, try refreshing or checking your signal.`);
     }
     setLoading(false);
   };
