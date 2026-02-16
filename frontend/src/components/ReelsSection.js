@@ -23,12 +23,7 @@ const ReelsSection = () => {
         fetchReels();
     }, []);
 
-    useEffect(() => {
-        // Process Instagram embeds whenever reels change
-        if (window.instgrm && window.instgrm.Embeds) {
-            window.instgrm.Embeds.process();
-        }
-    }, [reels]);
+
 
     const getEmbedUrl = (url) => {
         // Support /reel/, /reels/, /p/, /tv/
