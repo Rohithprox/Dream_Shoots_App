@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Film, Instagram, ExternalLink } from 'lucide-react';
 
-const BACKEND_URL = (process.env.REACT_APP_BACKEND_URL || '').replace(/\/$/, '');
+const BACKEND_URL = (process.env.REACT_APP_BACKEND_URL || '').replace(/\/$/, '').replace(/^http:/, 'https:');
 const API = `${BACKEND_URL}/api`;
 
 const ReelsSection = () => {
@@ -14,13 +14,14 @@ const ReelsSection = () => {
     useEffect(() => {
         const fetchReels = async () => {
             try {
-                const res = await axios.get(`${API}/reels`);
+                const url = `${API}/reels`;
+                const res = await axios.get(url);
                 if (Array.isArray(res.data)) {
                     setReels(res.data);
                 }
             } catch (err) {
                 console.error('Failed to fetch reels', err);
-                setError('Failed to load reels. Please view directly on Instagram.');
+                setError(`Failed to load reels from ${API}/reels. Please view directly on Instagram.`);
             } finally {
                 setLoading(false);
             }
