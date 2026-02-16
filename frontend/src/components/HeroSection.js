@@ -8,10 +8,10 @@ const HeroSection = () => {
   };
 
   return (
-    <section data-testid="hero-section" className="relative min-h-screen flex flex-col items-center justify-center text-center px-4 pt-24 pb-16 overflow-hidden">
+    <section data-testid="hero-section" className="relative min-h-[100dvh] flex flex-col items-center justify-center text-center px-4 pt-24 pb-16 overflow-hidden">
       {/* Background red glow */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-[var(--ds-red)] opacity-[0.06] blur-[120px] rounded-full pointer-events-none" />
-      
+
       {/* Badge */}
       <div
         data-testid="hero-badge"

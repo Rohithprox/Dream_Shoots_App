@@ -294,4 +294,6 @@ html { scroll-behavior: smooth; }
   * { @apply border-border; }
   body { @apply bg-background text-foreground; }
   [data-debug-wrapper="true"] { display: contents !important; }
+  .no-scrollbar::-webkit-scrollbar { display: none; }
+  .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
 }

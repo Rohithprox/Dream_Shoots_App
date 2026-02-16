@@ -75,7 +75,22 @@ const ReelsSection = () => {
                                         title={reel.title || "Instagram Reel"}
                                         scrolling="no"
                                         allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
+                                        loading="lazy"
                                     ></iframe>
+
+                                    {/* Fallback for blocked embeds (e.g. Jio) */}
+                                    <div className="absolute inset-0 flex flex-col items-center justify-center p-6 text-center bg-[#050505] -z-10">
+                                        <Instagram size={40} className="text-gray-800 mb-4" />
+                                        <p className="text-gray-500 text-xs mb-4">If the reel doesn't load, view it directly on Instagram.</p>
+                                        <a
+                                            href={reel.url}
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            className="text-[var(--ds-red)] text-sm font-bold flex items-center gap-2 hover:underline"
+                                        >
+                                            View on Instagram <ExternalLink size={14} />
+                                        </a>
+                                    </div>
 
                                     {/* Overlay for interaction */}
                                     <div className="absolute inset-x-0 bottom-0 p-6 bg-gradient-to-t from-black via-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
