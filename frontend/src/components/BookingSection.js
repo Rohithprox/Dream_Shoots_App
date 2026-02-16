@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Zap, Calendar, Clock, MapPin, FileText, User, Phone, CheckCircle } from 'lucide-react';
 import axios from 'axios';
 
-const BACKEND_URL = (process.env.REACT_APP_BACKEND_URL || '').replace(/\/$/, '');
+const BACKEND_URL = (process.env.REACT_APP_BACKEND_URL || '').replace(/\/$/, '').replace(/^http:/, 'https:');
 const API = `${BACKEND_URL}/api`;
 
 const BookingSection = () => {
@@ -35,7 +35,7 @@ const BookingSection = () => {
     } catch (err) {
       console.error('Booking Error:', err);
       const msg = err.response?.data?.detail || err.message || 'Connection failed';
-      setError(`Issue: ${msg}. If on mobile data, try refreshing or checking your signal.`);
+      setError(`Issue: ${msg} (URL: ${API}/bookings). If on mobile data, try refreshing or checking your signal.`);
     }
     setLoading(false);
   };
