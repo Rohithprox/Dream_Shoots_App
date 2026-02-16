@@ -39,7 +39,7 @@ const Navbar = () => {
         </div>
 
         <div className="hidden md:flex items-center gap-8">
-          {['About', 'Pricing', 'Locations', 'Contact'].map((item) => (
+          {['Portfolio', 'About', 'Pricing', 'Locations', 'Contact'].map((item) => (
             <button
               key={item}
               data-testid={`nav-${item.toLowerCase()}`}
@@ -69,7 +69,7 @@ const Navbar = () => {
 
       {mobileOpen && (
         <div className="md:hidden navbar border-t border-[#1a1a1a] px-6 py-4 space-y-3">
-          {['About', 'Pricing', 'Locations', 'Contact'].map((item) => (
+          {['Portfolio', 'About', 'Pricing', 'Locations', 'Contact'].map((item) => (
             <button
               key={item}
               onClick={() => scrollTo(item.toLowerCase())}

@@ -2,21 +2,25 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Film, Instagram, ExternalLink } from 'lucide-react';
 
-const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
+const BACKEND_URL = (process.env.REACT_APP_BACKEND_URL || '').replace(/\/$/, '');
 const API = `${BACKEND_URL}/api`;
 
 const ReelsSection = () => {
     const [reels, setReels] = useState([]);
     const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
     const [activeReels, setActiveReels] = useState({}); // Track which reels are loaded
 
     useEffect(() => {
         const fetchReels = async () => {
             try {
                 const res = await axios.get(`${API}/reels`);
-                setReels(res.data);
+                if (Array.isArray(res.data)) {
+                    setReels(res.data);
+                }
             } catch (err) {
                 console.error('Failed to fetch reels', err);
+                setError('Failed to load reels. Please view directly on Instagram.');
             } finally {
                 setLoading(false);
             }
@@ -27,6 +31,7 @@ const ReelsSection = () => {
 
 
     const getEmbedUrl = (url) => {
+        if (!url) return null;
         // Support /reel/, /reels/, /p/, /tv/
         const match = url.match(/(?:reels|reel|p|tv)\/([^\/?#&]+)/);
         if (match && match[1]) {
@@ -35,8 +40,7 @@ const ReelsSection = () => {
         return null;
     };
 
-    if (loading && reels.length === 0) return null;
-    if (!loading && reels.length === 0) return null;
+    // Removed the "return null" conditions to ensure the section header always renders
 
     return (
         <section id="reels" className="py-10 bg-black overflow-hidden">
@@ -134,6 +138,33 @@ const ReelsSection = () => {
                             </div>
                         );
                     })}
+
+                    {reels.length === 0 && !loading && (
+                        <div className="col-span-1 sm:col-span-2 lg:col-span-3 text-center py-12 border border-dashed border-white/10 rounded-3xl">
+                            <Instagram className="mx-auto text-gray-700 mb-4" size={48} />
+                            <h3 className="text-white font-bold mb-2">
+                                {error ? 'Connection Issue' : 'No Reels Found'}
+                            </h3>
+                            <p className="text-gray-500 text-sm max-w-xs mx-auto mb-6">
+                                {error || 'Our portfolio is currently being updated. Check back soon or visit our Instagram.'}
+                            </p>
+                            <a
+                                href="https://www.instagram.com/dreamshoots_inc/"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="inline-flex items-center gap-2 text-[var(--ds-red)] font-bold text-sm hover:underline"
+                            >
+                                Visit Instagram Portfolio <ExternalLink size={16} />
+                            </a>
+                        </div>
+                    )}
+
+                    {loading && (
+                        <div className="col-span-1 sm:col-span-2 lg:col-span-3 text-center py-12">
+                            <div className="inline-block w-8 h-8 border-2 border-[var(--ds-red)] border-t-transparent rounded-full animate-spin mb-4 transition-all"></div>
+                            <p className="text-gray-500 text-sm">Loading portfolio...</p>
+                        </div>
+                    )}
                 </div>
             </div>
         </section>
