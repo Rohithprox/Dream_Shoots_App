@@ -74,16 +74,22 @@ const ReelsSection = () => {
                                     ></iframe>
 
                                     {/* Fallback for blocked embeds (e.g. Jio) */}
-                                    <div className="absolute inset-0 flex flex-col items-center justify-center p-6 text-center bg-[#050505] -z-10">
-                                        <Instagram size={40} className="text-gray-800 mb-4" />
-                                        <p className="text-gray-500 text-xs mb-4">If the reel doesn't load, view it directly on Instagram.</p>
+                                    <div className="absolute inset-0 flex flex-col items-center justify-center p-8 text-center bg-[#070707] -z-10">
+                                        <div className="w-16 h-16 bg-white/5 rounded-full flex items-center justify-center mb-6">
+                                            <Instagram size={32} className="text-gray-600" />
+                                        </div>
+                                        <h4 className="text-white font-bold text-sm mb-2">Can't see the Reel?</h4>
+                                        <p className="text-gray-500 text-[11px] leading-relaxed mb-6">
+                                            Some networks (like Jio) or slow connections might block Instagram content.
+                                            You can still view this shoot directly on Instagram.
+                                        </p>
                                         <a
                                             href={reel.url}
                                             target="_blank"
                                             rel="noopener noreferrer"
-                                            className="text-[var(--ds-red)] text-sm font-bold flex items-center gap-2 hover:underline"
+                                            className="bg-white/5 hover:bg-white/10 border border-white/10 px-5 py-2.5 rounded-full text-white text-xs font-bold flex items-center gap-2 transition-all"
                                         >
-                                            View on Instagram <ExternalLink size={14} />
+                                            View on Instagram <ExternalLink size={14} className="text-[var(--ds-red)]" />
                                         </a>
                                     </div>
 
