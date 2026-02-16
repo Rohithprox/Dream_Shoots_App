@@ -2,11 +2,11 @@ import React from 'react';
 import { MapPin } from 'lucide-react';
 
 const locations = [
-  { city: 'Nellore', tagline: 'Our Home Base', main: true, icon: '/Dream Shoots Logo nlr.png' },
-  { city: 'Hyderabad', tagline: 'The City of Pearls', main: false, icon: '/Dream Shoots Logo hyd.png' },
-  { city: 'Vijayawada', tagline: 'The Business Capital', main: false, icon: '/Dream Shoots Logo vjw.png' },
-  { city: 'Tirupati', tagline: 'The Spiritual Hub', main: false, icon: '/dream shoots tpt.png' },
-  { city: 'Ongole', tagline: 'The Pride of Prakasam', main: false, icon: '/Dream Shoots Logo - Ongole.png' },
+  { city: 'Nellore', tagline: 'Our Home Base', main: true, icon: '/Dream%20Shoots%20Logo%20nlr.png' },
+  { city: 'Hyderabad', tagline: 'The City of Pearls', main: false, icon: '/Dream%20Shoots%20Logo%20hyd.png' },
+  { city: 'Vijayawada', tagline: 'The Business Capital', main: false, icon: '/Dream%20Shoots%20Logo%20vjw.png' },
+  { city: 'Tirupati', tagline: 'The Spiritual Hub', main: false, icon: '/dream%20shoots%20tpt.png' },
+  { city: 'Ongole', tagline: 'The Pride of Prakasam', main: false, icon: '/Dream%20Shoots%20Logo%20-%20Ongole.png' },
 ];
 
 const LocationsSection = () => {
