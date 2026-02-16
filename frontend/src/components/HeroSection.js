@@ -24,7 +24,7 @@ const HeroSection = () => {
       {/* Heading */}
       <h1 className="hero-heading text-5xl sm:text-7xl md:text-8xl lg:text-9xl leading-[0.95] mb-8">
         <span className="block text-white">FAST CONTENT</span>
-        <span className="text-red-600 block mb-2 animate-pulse-glow">REAL CREATORS</span>
+        <span className="text-red-600 block mb-2">REAL CREATORS</span>
         <span className="block text-white">DELIVERED QUICKLY</span>
       </h1>
 
