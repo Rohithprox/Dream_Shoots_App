@@ -77,11 +77,11 @@ const BookingSection = () => {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div>
                 <label className="ds-label"><User size={14} className="text-[var(--ds-red)]" /> Your Name *</label>
-                <input data-testid="booking-name-input" type="text" name="name" value={form.name} onChange={handleChange} placeholder="Rohith" required className="ds-input" />
+                <input data-testid="booking-name-input" type="text" name="name" value={form.name} onChange={handleChange} placeholder="Your Name" required className="ds-input" />
               </div>
               <div>
                 <label className="ds-label"><Phone size={14} className="text-[var(--ds-red)]" /> Phone Number *</label>
-                <input data-testid="booking-phone-input" type="tel" name="phone" value={form.phone} onChange={handleChange} placeholder="+91 98765 43210" required className="ds-input" />
+                <input data-testid="booking-phone-input" type="tel" name="phone" value={form.phone} onChange={handleChange} placeholder="+91 9090909090" required className="ds-input" />
               </div>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
