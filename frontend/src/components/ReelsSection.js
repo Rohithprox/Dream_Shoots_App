@@ -109,11 +109,6 @@ const ReelsSection = () => {
                                         </a>
                                     </div>
                                 </div>
-                                <div className="mt-4 text-center">
-                                    <h3 className="text-white font-medium text-sm group-hover:text-[var(--ds-red)] transition-colors">
-                                        {reel.title || "Professional Shoot"}
-                                    </h3>
-                                </div>
                             </div>
                         );
                     })}
